@@ -1,23 +1,12 @@
+import { Students } from "./connectors";
+
 const resolvers = {
   Query: {
-    author(root, args) {
-      return { id: 1, firstName: "hello", lastName: "World" };
+    student(root, args) {
+      return Students.findOne({ sid: args.sid }).then(student => student);
     },
-    allAuthors() {
-      return [{ id: 1, firstName: "hello", lastName: "World" }];
-    }
-  },
-  Author: {
-    posts(author) {
-      return [
-        { id: 1, title: "A post", text: "Some text", views: 2 },
-        { id: 2, title: "Another post", text: "Some other text", views: 200 }
-      ];
-    }
-  },
-  Post: {
-    author(post) {
-      return { id: 1, firstName: "Hello", lastName: "World" };
+    allStudents() {
+      return Students.find({}).then(students => students);
     }
   }
 };

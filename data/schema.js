@@ -4,22 +4,36 @@ import resolvers from './resolvers';
 
 const typeDefs = `
 type Query {
-  author(firstName: String, lastName: String): Author
-  allAuthors: [Author]
-  getFortuneCookie: String # we'll use this later
+  student(sid: ID): Student
+  allStudents: [Student]
 }
-type Author {
-  id: Int
-  firstName: String
-  lastName: String
-  posts: [Post]
+type Student {
+  name: Name
+  dob: String
+  picture: Picture
+  location: Location
+  phone: String
+  cell: String
+  email: String
+  registered: Int
+  major: String
+  gpa: String
+  sid: ID!
+  modified: Float
+  mdifiedby: String
 }
-type Post {
-  id: Int
-  title: String
-  text: String
-  views: Int
-  author: Author
+type Name {
+  first: String
+  last: String
+}
+type Picture {
+  large: String
+}
+type Location {
+  street: String
+  city: String
+  state: String
+  postcode: String
 }
 `;
 
