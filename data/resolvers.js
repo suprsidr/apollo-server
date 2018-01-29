@@ -1,4 +1,4 @@
-import { Students } from "./connectors";
+import { Students } from './connectors';
 
 const resolvers = {
   Query: {
@@ -6,7 +6,14 @@ const resolvers = {
       return Students.findOne({ sid: args.sid }).then(student => student);
     },
     allStudents() {
-      return Students.find({}).then(students => students);
+      return Students.find({})
+        .sort({ 'name.last': 1 })
+        .then(students => students);
+    },
+    search(root, { field, query, sort, direction = 1 }) {
+      return Students.find({ [field]: { $regex: query } })
+        .sort({ [sort]: direction })
+        .then(students => students);
     }
   }
 };

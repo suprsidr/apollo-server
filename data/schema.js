@@ -1,4 +1,4 @@
-import { makeExecutableSchema, addMockFunctionsToSchema } from "graphql-tools";
+import { makeExecutableSchema, addMockFunctionsToSchema } from 'graphql-tools';
 import resolvers from './resolvers';
 //import mocks from "./mocks";
 
@@ -6,6 +6,7 @@ const typeDefs = `
 type Query {
   student(sid: ID): Student
   allStudents: [Student]
+  search(field: String, query: String, sort: String, direction: Int): [Student]
 }
 type Student {
   name: Name
@@ -20,7 +21,7 @@ type Student {
   gpa: String
   sid: ID!
   modified: Float
-  mdifiedby: String
+  modifiedby: String
 }
 type Name {
   first: String

@@ -1,0 +1,81 @@
+{
+  search(field: "name.last", query: "Adams", sort: "name.first", direction: 1) {
+    name {
+      first
+      last
+    }
+    dob
+    phone
+    cell
+    email
+    registered
+    major
+    gpa
+    modified
+    modifiedby
+  }
+}
+
+{
+  search(field: "name.last", query: "^(A|a)", sort: "name.last", direction: 1) {
+    name {
+      first
+      last
+    }
+    dob
+    phone
+    cell
+    email
+    registered
+    major
+    gpa
+    modified
+    modifiedby
+  }
+}
+
+{
+  allStudents {
+    name {
+      first
+      last
+    }
+    dob
+    phone
+    cell
+    email
+    registered
+    major
+    gpa
+    modified
+    modifiedby
+  }
+}
+
+{
+  student(sid: "f01daca1-95a9-40b5-a4d5-ee1c344051f3") {
+    name {
+      first
+      last
+    }
+    location {
+      street
+      city
+      state
+      postcode
+    }
+    picture {
+      large
+    }
+    dob
+    phone
+    cell
+    email
+    registered
+    major
+    gpa
+    modified
+    modifiedby
+    sid
+  }
+}
