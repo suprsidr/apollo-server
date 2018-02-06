@@ -8,6 +8,46 @@ type Query {
   allStudents: [Student]
   search(field: String, query: String, sort: String, direction: Int): [Student]
 }
+type Mutation {
+  addStudent(input: StudentInput): Student
+  updateStudent(input: StudentInput): Student
+  deleteStudent(input: DeleteInput): DeleteResponse
+}
+type DeleteResponse {
+  ok: Boolean
+  error: String
+}
+input DeleteInput {
+  sid: ID
+}
+input StudentInput {
+  name: NameInput
+  dob: String
+  picture: PictureInput
+  location: LocationInput
+  phone: String
+  cell: String
+  email: String
+  major: String
+  gpa: String
+  registered: Int
+  sid: ID
+  modified: Float
+  modifiedby: String
+}
+input NameInput {
+  first: String
+  last: String
+}
+input PictureInput {
+  large: String
+}
+input LocationInput {
+  street: String
+  city: String
+  state: String
+  postcode: String
+}
 type Student {
   name: Name
   dob: String
@@ -16,11 +56,11 @@ type Student {
   phone: String
   cell: String
   email: String
-  registered: Int
+  registered: String
   major: String
   gpa: String
   sid: ID!
-  modified: Float
+  modified: String
   modifiedby: String
 }
 type Name {
