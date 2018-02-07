@@ -24,21 +24,17 @@ const resolvers = {
       console.log(student);
       student.sid = uuid.v4();
       student.modified = student.registered = Date.now();
-      student.dob = new Date(student.dob); //Date.parse(student.dob);
+      student.dob = new Date(student.dob);
 
-      return Students.create(student).then(result => {
-        console.log(result);
-        return result;
-      });
+      return Students.create(student).then(result => result);
     },
     updateStudent(_, { input: student }) {
       student.modified = Date.now();
-      return Students.update({ sid: student.sid }, { $set: student }).then(
-        ({ result }) => {
-          console.log(result);
-          return result;
-        }
-      );
+      return Students.findOneAndUpdate(
+        { sid: student.sid },
+        { $set: student },
+        { new: true }
+      ).then(result => result);
     },
     deleteStudent(_, { input: { sid } }) {
       return Students.remove({ sid: sid })
