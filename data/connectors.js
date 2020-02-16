@@ -9,12 +9,12 @@ const mongo = Mongoose.connect("mongodb://localhost:27017/hhproducts?authSource=
 });
 
 // Connected handler
-mongoose.connection.on('connected', function (err) {
+mongo.connection.on('connected', function (err) {
   console.log("Connected to DB using chain: " + connectionString);
 });
 
 // Error handler
-mongoose.connection.on('error', function (err) {
+mongo.connection.on('error', function (err) {
   console.log(err);
 });
 
