@@ -8,6 +8,16 @@ const mongo = Mongoose.connect("mongodb://localhost:27017/hhproducts?authSource=
   useMongoClient: true
 });
 
+// Connected handler
+mongoose.connection.on('connected', function (err) {
+  console.log("Connected to DB using chain: " + connectionString);
+});
+
+// Error handler
+mongoose.connection.on('error', function (err) {
+  console.log(err);
+});
+
 const StudentSchema = Mongoose.Schema({
   name: { first: String, last: String },
   dob: String,
