@@ -6,16 +6,6 @@ const mongo = Mongoose.connect("mongodb://appAdmin:WsP010867@#$%@localhost:27017
   useMongoClient: true
 });
 
-// Connected handler
-mongo.connection.on('connected', function (err) {
-  console.log("Connected to DB using chain: " + connectionString);
-});
-
-// Error handler
-mongo.connection.on('error', function (err) {
-  console.log(err);
-});
-
 const StudentSchema = Mongoose.Schema({
   name: { first: String, last: String },
   dob: String,
