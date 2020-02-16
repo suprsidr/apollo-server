@@ -2,7 +2,7 @@ import Mongoose from "mongoose";
 
 Mongoose.Promise = global.Promise;
 
-const mongo = Mongoose.connect("mongodb://appAdmin:WsP010867@#$%@localhost:27017/hhproducts?authSource=admin", {
+const mongo = Mongoose.connect("mongodb://localhost:27017/hhproducts", {
   useMongoClient: true
 });
 
