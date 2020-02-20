@@ -1,17 +1,32 @@
 import { Students } from './connectors';
 import uuid from 'uuid';
+const ItemProvider = require("../itemprovider-mongodb").ItemProvider;
+const itemProvider = new ItemProvider();
+
+itemProvider.open(function (err) { console.log(err) });
 
 const errorResponse = { ok: false, error: 'Oops something went wrong!' };
 
 const resolvers = {
   Query: {
     student(_, args) {
-      return Students.findOne({ sid: args.sid }).then(student => student);
+      return itemProvider.findOne({
+        collection: "students",
+        query: { sid: args.sid },
+        limit: 0,
+        sort: {},
+        fields: {}
+      });
     },
     allStudents() {
-      return Students.find({})
-        .sort({ 'name.last': 1 })
-        .then(students => students);
+      return itemProvider.findItems(
+          {
+            collection: "students",
+            query: {},
+            limit: 0,
+            sort: {},
+            fields: {}
+          })
     },
     search(_, { field, query, sort, direction = 1 }) {
       return Students.find({ [field]: { $regex: query } })
@@ -37,16 +52,10 @@ const resolvers = {
       ).then(result => result);
     },
     deleteStudent(_, { input: { sid } }) {
-      return Students.remove({ sid: sid })
-        .then(({ result }) => {
-          if (result.ok && result.n > 0) {
-            return { ok: true, error: '' };
-          }
-          return errorResponse;
-        })
-        .catch(err => {
-          return errorResponse;
-        });
+      return itemProvider.deleteItem({
+        collection: "students",
+        query: { sid: sid }
+      });
     }
   }
 };

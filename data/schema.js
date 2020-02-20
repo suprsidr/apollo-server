@@ -15,7 +15,7 @@ type Mutation {
 }
 type DeleteResponse {
   ok: Boolean
-  error: String
+  deletedCount: Int
 }
 input DeleteInput {
   sid: ID
